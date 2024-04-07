@@ -2,3 +2,8 @@
 **/test/
 **/.clang-format
 **/Makefile
+
+# for AtCoder: AHC
+**/out/
+**/seeds/
+**/in/
