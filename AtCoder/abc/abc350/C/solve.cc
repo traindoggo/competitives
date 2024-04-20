@@ -54,7 +54,7 @@ int main() {
   for (int i = 1; i <= n; ++i) {
     // push ans
     if (ai[i] != i) {
-      ans.push_back({min(i, mp[i]), max(i, mp[i])});
+      ans.push_back({i, mp[i]});
 
       int swapped_idx = mp[i];
       mp[i] = i;
