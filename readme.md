@@ -20,3 +20,5 @@
 - [D - Dice Sum](https://atcoder.jp/contests/abc248/tasks/abc248_c)
 - [D - Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)
 - [D - Teleporter](https://atcoder.jp/contests/abc167/tasks/abc167_d)
+- [C - 数式の書き換え](https://atcoder.jp/contests/abc033/tasks/abc033_c)
+- [D - Mismatched Parentheses](https://atcoder.jp/contests/abc307/submissions/52809017)
