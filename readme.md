@@ -2,14 +2,14 @@
 
 ## AC but it took too long.
 
-- (1) [Coprimes](https://atcoder.jp/contests/abc215/tasks/abc215_d)
-- (1) [Simple Path](https://atcoder.jp/contests/abc270/tasks/abc270_c)
-- (1) [線型計画法](https://atcoder.jp/contests/abc338/tasks/abc338_c)
-- (1) [Bowls and Dishes](https://atcoder.jp/contests/abc190/tasks/abc190_c)
-- (1) [Matrix Reducing](https://atcoder.jp/contests/abc264/tasks/abc264_c)
-- (1) [Cards Query Pooblem](https://atcoder.jp/contests/abc298/tasks/abc298_c)
-- (1) [Dearrangement Adhoc](https://atcoder.jp/contests/abc072/submissions/me)
-- (1) [DFS Snuke Maze](https://atcoder.jp/contests/abc308/tasks/abc308_d)
+- [Coprimes](https://atcoder.jp/contests/abc215/tasks/abc215_d)
+- [Simple Path](https://atcoder.jp/contests/abc270/tasks/abc270_c)
+- [線型計画法](https://atcoder.jp/contests/abc338/tasks/abc338_c)
+- [Bowls and Dishes](https://atcoder.jp/contests/abc190/tasks/abc190_c)
+- [Matrix Reducing](https://atcoder.jp/contests/abc264/tasks/abc264_c)
+- [Cards Query Pooblem](https://atcoder.jp/contests/abc298/tasks/abc298_c)
+- [Dearrangement Adhoc](https://atcoder.jp/contests/abc072/submissions/me)
+- [DFS Snuke Maze](https://atcoder.jp/contests/abc308/tasks/abc308_d)
 
 ## WA わぁ!
 
@@ -24,6 +24,7 @@
 - [Longest X](https://atcoder.jp/contests/abc229/tasks/abc229_d)
   - Ran-Length Compression?
 - [Super Takahshi Bros.(Dijkstra)](https://atcoder.jp/contests/abc340/tasks/abc340_d)
+- [D - Shift vs Capslock](https://atcoder.jp/contests/abc303/tasks/abc303_d)
 
 # Details
 
