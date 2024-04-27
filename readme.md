@@ -10,6 +10,7 @@
 - [Cards Query Pooblem](https://atcoder.jp/contests/abc298/tasks/abc298_c)
 - [Dearrangement Adhoc](https://atcoder.jp/contests/abc072/submissions/me)
 - [DFS Snuke Maze](https://atcoder.jp/contests/abc308/tasks/abc308_d)
+- [D - Dice in Line](https://atcoder.jp/contests/abc154/tasks/abc154_d)
 
 ## WA わぁ!
 
