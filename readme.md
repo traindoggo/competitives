@@ -21,3 +21,5 @@
 - [chokudai](https://atcoder.jp/contests/abc211/tasks/abc211_c)
 - [Many Medians](https://atcoder.jp/contests/abc094/tasks/arc095_a)
 - [Range Count Query](https://atcoder.jp/contests/abc248/tasks/abc248_d)
+- [Longest X](https://atcoder.jp/contests/abc229/tasks/abc229_d)
+  - Ran-Length Compression?
