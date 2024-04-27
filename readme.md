@@ -1,10 +1,6 @@
-# Reviews
+# Reviewers
 
-```
-- (num of ACs) Prob URL
-```
-
-## AC
+## AC but it took too long.
 
 - (1) [Coprimes](https://atcoder.jp/contests/abc215/tasks/abc215_d)
 - (1) [Simple Path](https://atcoder.jp/contests/abc270/tasks/abc270_c)
@@ -15,7 +11,7 @@
 - (1) [Dearrangement Adhoc](https://atcoder.jp/contests/abc072/submissions/me)
 - (1) [DFS Snuke Maze](https://atcoder.jp/contests/abc308/tasks/abc308_d)
 
-## WA
+## WA わぁ!
 
 - [Dice Sum](https://atcoder.jp/contests/abc248/tasks/abc248_c)
 - [Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)
