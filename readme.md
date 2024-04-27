@@ -23,3 +23,13 @@
 - [Range Count Query](https://atcoder.jp/contests/abc248/tasks/abc248_d)
 - [Longest X](https://atcoder.jp/contests/abc229/tasks/abc229_d)
   - Ran-Length Compression?
+
+# Details
+
+## 累積和
+
+- https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0516
+
+## 尺取り法
+
+- https://qiita.com/drken/items/ecd1a472d3a0e7db8dce
