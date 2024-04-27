@@ -17,9 +17,11 @@
 
 ## WA
 
-- [D - Dice Sum](https://atcoder.jp/contests/abc248/tasks/abc248_c)
-- [D - Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)
-- [D - Teleporter](https://atcoder.jp/contests/abc167/tasks/abc167_d)
-- [C - 数式の書き換え](https://atcoder.jp/contests/abc033/tasks/abc033_c)
-- [D - Mismatched Parentheses](https://atcoder.jp/contests/abc307/submissions/52809017)
-- [C - chokudai](https://atcoder.jp/contests/abc211/tasks/abc211_c)
+- [Dice Sum](https://atcoder.jp/contests/abc248/tasks/abc248_c)
+- [Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)
+- [Teleporter](https://atcoder.jp/contests/abc167/tasks/abc167_d)
+- [数式の書き換え](https://atcoder.jp/contests/abc033/tasks/abc033_c)
+- [Mismatched Parentheses](https://atcoder.jp/contests/abc307/submissions/52809017)
+- [chokudai](https://atcoder.jp/contests/abc211/tasks/abc211_c)
+- [Many Medians](https://atcoder.jp/contests/abc094/tasks/arc095_a)
+- [Range Count Query](https://atcoder.jp/contests/abc248/tasks/abc248_d)
