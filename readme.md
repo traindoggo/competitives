@@ -23,7 +23,7 @@
 - [Many Medians](https://atcoder.jp/contests/abc094/tasks/arc095_a)
 - [Range Count Query](https://atcoder.jp/contests/abc248/tasks/abc248_d)
 - [Longest X](https://atcoder.jp/contests/abc229/tasks/abc229_d)
-  - Ran-Length Compression?
+  - can't use Ran-Length Compression
 - [Super Takahshi Bros.(Dijkstra)](https://atcoder.jp/contests/abc340/tasks/abc340_d)
 - [D - Shift vs Capslock](https://atcoder.jp/contests/abc303/tasks/abc303_d)
 
