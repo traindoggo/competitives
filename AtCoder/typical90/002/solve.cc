@@ -32,21 +32,6 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-bool is_good_bracket(const string& s) {
-  int open{};
-  for (const char& ch : s) {
-    if (ch == '(') {
-      open++;
-    } else {
-      open--;
-    }
-
-    if (open < 0) return false;
-  }
-
-  return open == 0;
-}
-
 int main() {
   int n;
   cin >> n;
@@ -56,19 +41,26 @@ int main() {
     return 0;
   }
 
-  rep(bit, 1 << n) {
-    string bracket{};
+  string bracket{};
+  rep(i, n / 2) bracket.push_back('(');
+  rep(i, n / 2) bracket.push_back(')');
 
-    for (int i = n - 1; i >= 0; --i) {
-      if (bit & (1 << i)) {
-        bracket += ")";
+  auto is_good = [](const string& s) -> bool {
+    int open{};
+    for (auto ch : s) {
+      if (ch == '(') {
+        open++;
       } else {
-        bracket += "(";
+        open--;
       }
+      if (open < 0) return false;
     }
+    return open == 0;
+  };
 
-    if (is_good_bracket(bracket)) {
+  do {
+    if (is_good(bracket)) {
       cout << bracket << el;
     }
-  }
+  } while (next_permutation(all(bracket)));
 }
