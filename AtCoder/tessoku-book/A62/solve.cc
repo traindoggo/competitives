@@ -32,26 +32,44 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using Graph = vector<vector<int>>;
+
 int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<int> ai(n), bi(m);
-  rep(i, n) cin >> ai[i];
-  rep(i, m) cin >> bi[i];
-  sort(all(ai));
-  sort(all(bi));
-
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
-
-    if (ai[l] < bi[r]) {
-      l++;
-    } else {
-      r++;
-    }
+  Graph graph(n);
+  rep(_, m) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
+    graph[a].push_back(b);
+    graph[b].push_back(a);
   }
-  cout << ans << el;
+
+  vector<bool> seen(n, false);
+  auto dfs = [&](int sv) {
+    seen[sv] = true;
+
+    stack<int> st;
+    st.push(sv);
+
+    while (!st.empty()) {
+      int v = st.top();
+      st.pop();
+
+      for (auto nv : graph[v]) {
+        if (seen[nv]) continue;
+        seen[nv] = true;
+        st.push(nv);
+      }
+    }
+  };
+
+  dfs(0);
+
+  rep(i, n) {
+    if (!seen[i]) die("The graph is not connected.");
+  }
+  cout << "The graph is connected." << el;
 }

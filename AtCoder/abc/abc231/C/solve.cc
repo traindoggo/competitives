@@ -33,25 +33,29 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n, q;
+  cin >> n >> q;
 
-  vector<int> ai(n), bi(m);
+  vector<int> ai(n);
   rep(i, n) cin >> ai[i];
-  rep(i, m) cin >> bi[i];
   sort(all(ai));
-  sort(all(bi));
 
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
+  rep(_, q) {
+    int x;
+    cin >> x;
 
-    if (ai[l] < bi[r]) {
-      l++;
-    } else {
-      r++;
+    // the answer could be zero.
+    int left{-1}, right{n};
+    while (right - left > 1) {
+      int mid = left + (right - left) / 2;
+      // true 条件
+      if (ai[mid] >= x) {
+        right = mid;
+      } else {
+        left = mid;
+      }
     }
+
+    cout << n - right << el;
   }
-  cout << ans << el;
 }

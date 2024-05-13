@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+
+#include <iostream>
 using namespace std;
 
 #ifdef DEBUG_
@@ -32,26 +34,41 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using Graph = vector<vector<int>>;
+
 int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<int> ai(n), bi(m);
-  rep(i, n) cin >> ai[i];
-  rep(i, m) cin >> bi[i];
-  sort(all(ai));
-  sort(all(bi));
+  Graph graph(n);
+  rep(_, m) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
 
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
-
-    if (ai[l] < bi[r]) {
-      l++;
-    } else {
-      r++;
-    }
+    graph[a].push_back(b);
+    graph[b].push_back(a);
   }
-  cout << ans << el;
+
+  vector<int> dist(n, -1);
+  auto bfs = [&](int sv) {
+    dist[sv] = 0;
+    queue<int> que;
+    que.push(sv);
+
+    while (!que.empty()) {
+      int v = que.front();
+      que.pop();
+
+      for (auto nv : graph[v]) {
+        if (dist[nv] != -1) continue;  // visited
+        dist[nv] = dist[v] + 1;        // move neighbor
+        que.push(nv);
+      }
+    }
+  };
+
+  bfs(0);
+
+  rep(i, n) cout << dist[i] << el;
 }

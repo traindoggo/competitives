@@ -33,25 +33,20 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n;
+  cin >> n;
 
-  vector<int> ai(n), bi(m);
-  rep(i, n) cin >> ai[i];
-  rep(i, m) cin >> bi[i];
-  sort(all(ai));
-  sort(all(bi));
+  string s;
+  cin >> s;
 
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
-
-    if (ai[l] < bi[r]) {
-      l++;
-    } else {
-      r++;
+  string ans{};
+  for (int i = n - 1; i >= 0; --i) {
+    if (s[i] == '1') {
+      int idx = i + 1;
+      rep(_, idx) ans.push_back('A');
+      rep(_, idx - 1) ans.push_back('B');
     }
   }
+  cout << ans.size() << el;
   cout << ans << el;
 }

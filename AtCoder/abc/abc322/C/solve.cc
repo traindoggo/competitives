@@ -36,22 +36,14 @@ int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<int> ai(n), bi(m);
+  vector<int> ai(n);
   rep(i, n) cin >> ai[i];
-  rep(i, m) cin >> bi[i];
   sort(all(ai));
-  sort(all(bi));
 
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
-
-    if (ai[l] < bi[r]) {
-      l++;
-    } else {
-      r++;
-    }
+  rep(a, n) {
+    auto idx = lower_bound(all(ai), a + 1);
+    auto pos = distance(ai.begin(), idx);
+    int day = ai[pos];
+    cout << day - (a + 1) << el;
   }
-  cout << ans << el;
 }
