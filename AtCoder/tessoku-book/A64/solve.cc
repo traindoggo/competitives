@@ -38,59 +38,49 @@ struct Edge {
   Edge(int to, int cost) : to(to), cost(cost) {}
 };
 
-// to, cost
+using Graph = vector<vector<Edge>>;
 using P = pair<int, int>;
-
-bool compare(const Edge& a, const Edge& b) {
-  return a.cost < b.cost;
-}
 
 int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<vector<P>> graph(n);
+  Graph graph(n);
   rep(_, m) {
-    int from, to, cost;
-    cin >> from >> to >> cost;
-    from--, to--;
+    int a, b, cost;
+    cin >> a >> b >> cost;
+    a--, b--;
 
-    graph[from].push_back(make_pair(to, cost));
-    graph[to].push_back(make_pair(from, cost));
+    graph[a].push_back(Edge(b, cost));
+    graph[b].push_back(Edge(a, cost));
   }
 
-  vector<bool> seen(n, false);
-  vector<int> costs(n, INFi);
+  vector<int> cost(n, INFi);
+  cost[0] = 0;
+
   priority_queue<P, vector<P>, greater<P>> que;
 
-  costs[0] = 0;
-
   // cost, to
-  que.push(make_pair(costs[0], 0));
+  que.push(make_pair(cost[0], 0));
 
   while (!que.empty()) {
-    auto [_, cur] = que.top();
+    // current cost, current vertex
+    auto [c, v] = que.top();
     que.pop();
 
-    if (seen[cur]) continue;
-    seen[cur] = true;
+    if (c > cost[v]) continue;
 
-    rep(i, (int)graph[cur].size()) {
-      int nx = graph[cur][i].first;
-      int nx_cost = graph[cur][i].second;
-
-      if (costs[nx] > costs[cur] + nx_cost) {
-        costs[nx] = costs[cur] + nx_cost;
-        que.push(make_pair(costs[nx], nx));
+    for (auto& edge : graph[v]) {
+      if (chmin(cost[edge.to], cost[v] + edge.cost)) {
+        que.push(make_pair(cost[edge.to], edge.to));
       }
     }
   }
 
   rep(i, n) {
-    if (costs[i] == INFi) {
+    if (cost[i] == INFi)
       cout << -1 << el;
-    } else {
-      cout << costs[i] << el;
-    }
+    else
+      cout << cost[i] << el;
   }
 }
