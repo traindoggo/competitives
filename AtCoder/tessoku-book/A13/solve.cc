@@ -38,24 +38,28 @@ int main() {
 
   vector<int> ai(n);
   rep(i, n) cin >> ai[i];
-  sort(all(ai));
 
   ll ans{};
-  rep(i, n) {
-    ll key = ai[i] + k;
-    ll left{}, right{n};
+  int left{}, right{1};
 
-    while (right - left > 1) {
-      ll mid = left + (right - left) / 2;
-      if (ai[mid] <= key) {
-        left = mid;
-      } else {
-        right = mid;
-      }
+  while (left != n - 1 && right != n) {
+    if (right == n) {
+      ans += right - left - 1;
+      dump("got", left, right);
+
+      left++;
+      right = left;
+      right++;
+    } else if (ai[left] + k >= ai[right]) {
+      right++;
+    } else {
+      ans += right - left - 1;
+      left++;
+      right = left;
+      right++;
     }
-
-    /* dump(i, left, right); */
-    ans += right - i - 1;
+    dump(left, right);
   }
+
   cout << ans << el;
 }
