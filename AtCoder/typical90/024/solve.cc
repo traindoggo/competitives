@@ -33,28 +33,21 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  ll n, k;
+  cin >> n >> k;
 
-  vector<vector<int>> grid(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> grid[i][j];
+  vector<ll> ai(n), bi(n);
+  rep(i, n) cin >> ai[i];
+  rep(i, n) cin >> bi[i];
 
-  vector<int> row(h, 0), col(w, 0);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += grid[i][j];
-    row[i] = sum;
-  }
+  ll diff{};
+  rep(i, n) diff += abs(ai[i] - bi[i]);
 
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += grid[i][j];
-    col[j] = sum;
-  }
+  dump(diff, k);
 
-  rep(i, h) {
-    rep(j, w) {
-      cout << row[i] + col[j] - grid[i][j] << (j != w - 1 ? ' ' : '\n');
-    }
-  }
+  if (k < diff) die("No");
+  if (k % 2 == diff % 2)
+    cout << "Yes" << el;
+  else
+    cout << "No" << el;
 }

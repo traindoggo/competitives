@@ -33,28 +33,10 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  ll a, b, c;
+  cin >> a >> b >> c;
 
-  vector<vector<int>> grid(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> grid[i][j];
-
-  vector<int> row(h, 0), col(w, 0);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += grid[i][j];
-    row[i] = sum;
-  }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += grid[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      cout << row[i] + col[j] - grid[i][j] << (j != w - 1 ? ' ' : '\n');
-    }
-  }
+  ll m = gcd(a, gcd(b, c));
+  ll ans = a / m - 1 + b / m - 1 + c / m - 1;
+  cout << ans << el;
 }
