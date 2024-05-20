@@ -36,31 +36,25 @@ int main() {
   int h, w;
   cin >> h >> w;
 
-  vector grid(h, vector<int>(w, 0));
+  vector<vector<int>> grid(h, vector<int>(w, 0));
   rep(i, h) rep(j, w) cin >> grid[i][j];
 
-  vector<int> rows(h, 0), cols(w, 0);
-
+  vector<int> row(h, 0), col(w, 0);
   rep(i, h) {
     int sum{};
-    rep(j, w) {
-      sum += grid[i][j];
-    }
-    rows[i] = sum;
+    rep(j, w) sum += grid[i][j];
+    row[i] = sum;
   }
 
   rep(j, w) {
     int sum{};
-    rep(i, h) {
-      sum += grid[i][j];
-    }
-    cols[j] = sum;
+    rep(i, h) sum += grid[i][j];
+    col[j] = sum;
   }
 
   rep(i, h) {
     rep(j, w) {
-      int sum = rows[i] + cols[j] - grid[i][j];
-      cout << sum << (j == w - 1 ? '\n' : ' ');
+      cout << row[i] + col[j] - grid[i][j] << (j != w - 1 ? ' ' : '\n');
     }
   }
 }
