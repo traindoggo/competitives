@@ -32,13 +32,6 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-ll calc(const vector<ll>& ai, const ll& t) {
-  ll sum{};
-  for (auto& a : ai) sum += t / a;
-
-  return sum;
-}
-
 int main() {
   ll n, k;
   cin >> n >> k;
@@ -46,14 +39,24 @@ int main() {
   vector<ll> ai(n);
   rep(i, n) cin >> ai[i];
 
+  auto sum = [&](int key) -> ll {
+    ll s{};
+    for (const ll& a : ai) {
+      s += key / a;
+    }
+    return s;
+  };
+
   ll left{}, right{INFi};
+
   while (right - left > 1) {
-    ll mid = left + (right - left) / 2;
-    if (k <= calc(ai, mid)) {
+    int mid = left + (right - left) / 2;
+    if (k <= sum(mid)) {
       right = mid;
     } else {
       left = mid;
     }
+    /* dump(left, right); */
   }
 
   cout << right << el;
