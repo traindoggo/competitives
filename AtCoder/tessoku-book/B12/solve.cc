@@ -33,7 +33,6 @@ using ll = long long int;
 using ld = long double;
 // clang-format on
 
-// x <= 100'000
 ld f(ld x) {
   return x * x * x + x;
 }
@@ -42,19 +41,19 @@ int main() {
   ld n;
   cin >> n;
 
-  // n <= 10^5
-  // f(n) <= (10^5)^3 = 10^15
-  ld left{}, right{1e16 + 1};
+  ld left{}, right{1e16};
 
-  while (right - left >= 0.00001) {
+  while (0.000001 < right - left) {
     ld mid = left + (right - left) / 2;
+
     if (n <= f(mid)) {
       right = mid;
     } else {
       left = mid;
     }
+    dump(left, right);
   }
 
-  cout << fixed << setprecision(5);
+  cout << fixed << setprecision(8);
   cout << right << el;
 }
