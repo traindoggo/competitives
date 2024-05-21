@@ -32,32 +32,17 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-/* map<ll, ll> factor(ll a) { */
-/*   map<ll, ll> mp; */
-/*  */
-/*   for (ll i = 2; i * i <= a; ++i) { */
-/*     while (a % i == 0) { */
-/*       mp[i]++; */
-/*       a /= i; */
-/*     } */
-/*   } */
-/*  */
-/*   if (a != 1) mp[a]++; */
-/*   dump(a); */
-/*  */
-/*   return mp; */
-/* } */
-
 int main() {
+  const ll INF = 1e18;
+
   ll a, b;
   cin >> a >> b;
 
-  // a * b == G
-  const ll K = 1e18;
-  ll G = gcd(a, b);
-  if (a / G > K / b) {
+  ll common = gcd(a, b);
+
+  if (a / common > INF / b) {
     cout << "Large" << el;
   } else {
-    cout << (a / G) * b << el;
+    cout << a / common * b << el;
   }
 }
