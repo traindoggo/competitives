@@ -30,30 +30,39 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 }
 
 using ll = long long int;
-using ld = long double;
 // clang-format on
 
-ld f(ld x) {
-  return x * x * x + x;
-}
+using Graph = vector<vector<int>>;
 
 int main() {
-  ld n;
-  cin >> n;
+  int n, m;
+  cin >> n >> m;
 
-  ld left{}, right{1e16};
+  Graph graph(n);
+  rep(_, m) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
 
-  while (0.000001 < right - left) {
-    ld mid = left + (right - left) / 2;
-
-    if (n <= f(mid)) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-    dump(left, right);
+    graph[a].push_back(b);
+    graph[b].push_back(a);
   }
 
-  cout << fixed << setprecision(8);
-  cout << right << el;
+  // n <= 10^5
+  rep(i, n) {
+    // どうせ小さい
+    sort(all(graph[i]));
+
+    int size = (int)graph[i].size();
+    if (size != 0) {
+      cout << size << ' ';
+      rep(j, size) {
+        cout << graph[i][j] + 1;
+        if (j < size - 1) cout << ' ';
+      }
+      cout << el;
+    } else {
+      cout << size << el;
+    }
+  }
 }

@@ -33,32 +33,27 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n, k;
+  ll n, k;
   cin >> n >> k;
 
-  vector<int> ai(n);
+  vector<ll> ai(n);
   rep(i, n) cin >> ai[i];
 
   ll ans{};
-  int left{}, right{1};
+  rep(i, n) {
+    ll cur = ai[i] + k;
 
-  while (left != n - 1 && right != n) {
-    if (right == n) {
-      ans += right - left - 1;
-      dump("got", left, right);
-
-      left++;
-      right = left;
-      right++;
-    } else if (ai[left] + k >= ai[right]) {
-      right++;
-    } else {
-      ans += right - left - 1;
-      left++;
-      right = left;
-      right++;
+    ll left{0}, right{n};
+    while (right - left > 1) {
+      int mid = left + (right - left) / 2;
+      if (ai[mid] <= cur) {
+        left = mid;
+      } else {
+        right = mid;
+      }
     }
-    dump(left, right);
+
+    ans += right - 1 - i;
   }
 
   cout << ans << el;

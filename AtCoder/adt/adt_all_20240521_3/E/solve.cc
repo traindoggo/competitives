@@ -30,30 +30,29 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 }
 
 using ll = long long int;
-using ld = long double;
 // clang-format on
 
-ld f(ld x) {
-  return x * x * x + x;
-}
-
 int main() {
-  ld n;
+  int n;
   cin >> n;
 
-  ld left{}, right{1e16};
+  string s{};
 
-  while (0.000001 < right - left) {
-    ld mid = left + (right - left) / 2;
+  auto rec = [&](auto f, int i) {
+    if (i > n) return;
 
-    if (n <= f(mid)) {
-      right = mid;
+    if (i == 1) {
+      s.push_back('1');
     } else {
-      left = mid;
+      s = s + ' ' + to_string(i) + ' ' + s;
     }
-    dump(left, right);
-  }
 
-  cout << fixed << setprecision(8);
-  cout << right << el;
+    // dump(i, s);
+
+    f(f, i + 1);
+  };
+
+  rec(rec, 1);
+
+  cout << s << el;
 }
