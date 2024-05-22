@@ -42,15 +42,15 @@ int main() {
   sort(all(ai));
   sort(all(bi));
 
-  int ans{INFi};
-  int l{}, r{};
-  while (l < n && r < m) {
-    chmin(ans, abs(ai[l] - bi[r]));
+  int ans{abs(ai.front() - bi.front())};
+  int left{}, right{};
 
-    if (ai[l] < bi[r]) {
-      l++;
+  while (left < n && right < m) {
+    chmin(ans, abs(ai[left] - bi[right]));
+    if (ai[left] < bi[right]) {
+      left++;
     } else {
-      r++;
+      right++;
     }
   }
   cout << ans << el;
