@@ -32,34 +32,49 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n, k;
-  cin >> n >> k;
+  int n;
+  cin >> n;
 
-  vector<int> ai(n);
-  rep(i, n) cin >> ai[i];
+  vector<int> ai(n - 1), bi(n - 2);
+  rep(i, n - 1) cin >> ai[i];
+  rep(i, n - 2) cin >> bi[i];
 
-  auto lowerbound = [&](int key) {
-    int left{}, right{(int)ai.size()};
-
-    while (right - left > 1) {
-      int mid = (right + left) / 2;
-
-      if (ai[mid] <= key) {
-        left = mid;
-      } else {
-        right = mid;
-      }
-    }
-
-    return right;
-  };
-
-  ll ans{};
+  vector<int> dp(n + 1, INFi);
+  dp[0] = 0;
 
   rep(i, n) {
-    int idx = lowerbound(ai[i] + k);
-    ans += idx - i - 1;
+    if (i < n - 1) {
+      chmin(dp[i + 1], dp[i] + ai[i]);
+    }
+    if (i < n - 2) {
+      chmin(dp[i + 2], dp[i] + bi[i]);
+    }
   }
 
-  cout << ans << el;
+  dump(ai);
+  dump(bi);
+  dump(dp);
+
+  vector<int> history;
+  int place{n - 1};
+
+  while (true) {
+    history.push_back(place + 1);
+    if (place == 0) break;
+
+    if (dp[place - 1] + ai[place - 1] == dp[place])
+      place -= 1;
+    else
+      place -= 2;
+  }
+
+  reverse(all(history));
+
+  int size = (int)history.size();
+  cout << size << el;
+  rep(i, size) {
+    if (i > 0) cout << ' ';
+    cout << history[i];
+  }
+  cout << el;
 }

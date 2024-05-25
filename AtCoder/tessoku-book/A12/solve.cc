@@ -10,13 +10,12 @@ using namespace std;
 // clang-format off
 struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
-#define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) do{cout<<(msg)<<'\n',exit(0);}while(0)
 #define el '\n'
+#define rep(i,n) for(int i=0;i<(int)n;++i)
+#define die(msg) cout<<(msg)<<el;exit(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -39,24 +38,21 @@ int main() {
   vector<ll> ai(n);
   rep(i, n) cin >> ai[i];
 
-  auto sum = [&](int key) -> ll {
-    ll s{};
-    for (const ll& a : ai) {
-      s += key / a;
-    }
-    return s;
+  auto f = [&](ll sec) -> ll {
+    ll sum{};
+    for (const ll& a : ai) sum += sec / a;
+    return sum;
   };
 
-  ll left{}, right{INFi};
+  ll left{}, right{(ll)1e14};
 
   while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (k <= sum(mid)) {
+    ll mid = left + (right - left) / 2;
+    if (f(mid) >= k) {
       right = mid;
     } else {
       left = mid;
     }
-    /* dump(left, right); */
   }
 
   cout << right << el;

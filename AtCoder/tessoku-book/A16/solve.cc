@@ -32,34 +32,28 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n, k;
-  cin >> n >> k;
+  int n;
+  cin >> n;
 
-  vector<int> ai(n);
-  rep(i, n) cin >> ai[i];
+  vector<int> ai(n - 1), bi(n - 2);
+  rep(i, n - 1) cin >> ai[i];
+  rep(i, n - 2) cin >> bi[i];
 
-  auto lowerbound = [&](int key) {
-    int left{}, right{(int)ai.size()};
+  dump(ai);
+  dump(bi);
 
-    while (right - left > 1) {
-      int mid = (right + left) / 2;
-
-      if (ai[mid] <= key) {
-        left = mid;
-      } else {
-        right = mid;
-      }
-    }
-
-    return right;
-  };
-
-  ll ans{};
+  vector<int> dp(n, INFi);
+  dp[0] = 0;
 
   rep(i, n) {
-    int idx = lowerbound(ai[i] + k);
-    ans += idx - i - 1;
+    if (i < n - 1) {
+      chmin(dp[i + 1], dp[i] + ai[i]);
+    }
+    if (i < n - 2) {
+      chmin(dp[i + 2], dp[i] + bi[i]);
+    }
+    dump(i, dp);
   }
 
-  cout << ans << el;
+  cout << dp[n - 1] << el;
 }

@@ -10,9 +10,9 @@ using namespace std;
 // clang-format off
 struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
-#define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) do{cout<<(msg)<<'\n',exit(0);}while(0)
 #define el '\n'
+#define rep(i,n) for (int i=0;i<(int)n;++i)
+#define die(msg) cout<<(msg)<<el;exit(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
@@ -31,35 +31,36 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-int main() {
-  int n, k;
-  cin >> n >> k;
+vector<bool> create_eratosthenes(int n) {
+  vector<bool> sheet(n + 1, true);
 
-  vector<int> ai(n);
-  rep(i, n) cin >> ai[i];
+  sheet[0] = false;
+  sheet[1] = false;
 
-  auto lowerbound = [&](int key) {
-    int left{}, right{(int)ai.size()};
+  for (int p = 2; p <= n; ++p) {
+    if (!sheet[p]) continue;
 
-    while (right - left > 1) {
-      int mid = (right + left) / 2;
-
-      if (ai[mid] <= key) {
-        left = mid;
-      } else {
-        right = mid;
-      }
+    for (int q = p * 2; q <= n; q += p) {
+      sheet[q] = false;
     }
-
-    return right;
-  };
-
-  ll ans{};
-
-  rep(i, n) {
-    int idx = lowerbound(ai[i] + k);
-    ans += idx - i - 1;
   }
 
-  cout << ans << el;
+  return sheet;
+}
+
+int main() {
+  int q;
+  cin >> q;
+
+  vector<int> xi(q);
+  rep(i, q) cin >> xi[i];
+
+  vector<bool> primes = create_eratosthenes(300001);
+
+  for (const int& x : xi) {
+    if (primes[x])
+      cout << "Yes" << el;
+    else
+      cout << "No" << el;
+  }
 }
