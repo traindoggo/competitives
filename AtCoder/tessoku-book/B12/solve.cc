@@ -16,7 +16,6 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -41,19 +40,17 @@ int main() {
   ld n;
   cin >> n;
 
-  ld left{}, right{1e16};
+  ld left{0}, right{1e16};
 
-  while (0.000001 < right - left) {
+  while (right - left > 0.000001) {
     ld mid = left + (right - left) / 2;
-
-    if (n <= f(mid)) {
+    if (f(mid) >= n) {
       right = mid;
     } else {
       left = mid;
     }
-    dump(left, right);
   }
 
-  cout << fixed << setprecision(8);
+  cout << fixed << setprecision(12);
   cout << right << el;
 }
