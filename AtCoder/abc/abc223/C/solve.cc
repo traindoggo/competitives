@@ -16,7 +16,6 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -30,33 +29,42 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 }
 
 using ll = long long int;
+using ld = long double;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-  }
-  return right;
-}
-}  // namespace me
-
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n;
+  cin >> n;
+  vector<int> ai(n);
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
-
+  vector<pair<ld, ld>> vp;
   rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+    ld a, b;
+    cin >> a >> b;
+    vp.emplace_back(a, b);
+  }
+
+  auto calc_time = [](ld a_cm, ld b_cm_per_sec) { return a_cm / b_cm_per_sec; };
+
+  ld sum_time{};
+  for (auto [a, b] : vp) {
+    sum_time += calc_time(a, b);
+  }
+
+  ld collision_time = sum_time / 2;
+  ld ans_cm{};
+
+  for (auto [a, b] : vp) {
+    ld t = calc_time(a, b);
+
+    if (collision_time > t) {
+      collision_time -= t;
+      ans_cm += a;
+    } else {
+      ans_cm += collision_time * b;
+
+      cout << fixed << setprecision(15);
+      die(ans_cm);
+    }
   }
 }

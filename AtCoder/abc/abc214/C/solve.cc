@@ -16,7 +16,6 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -32,31 +31,22 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-  }
-  return right;
-}
-}  // namespace me
-
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n;
+  cin >> n;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  vector<int> si(n), ti(n);
+  rep(i, n) cin >> si[i];
+  rep(i, n) cin >> ti[i];
 
-  rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+  vector<int> snuke(n, INFi);
+  rep(i, n) snuke[i] = ti[i];
+
+  rep(i, 2 * n + 1) {
+    chmin(snuke[(i + 1) % n], snuke[i % n] + si[i % n]);
+  }
+
+  for (const int& s : snuke) {
+    cout << s << el;
   }
 }

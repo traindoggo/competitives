@@ -34,29 +34,57 @@ using ll = long long int;
 
 namespace me {
 int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
+  int ng{-1}, ok{(int)ai.size()};
+
+  while (ok - ng > 1) {
+    int mid = ng + (ok - ng) / 2;
+    if (ai[mid] > key) {
+      ok = mid;
     } else {
-      left = mid;
+      ng = mid;
     }
   }
-  return right;
+  return ok;
+}
+
+int upper_bound(const vector<int>& ai, int key) {
+  int ng{-1}, ok{(int)ai.size()};
+
+  while (abs(ok - ng) > 1) {
+    int mid = ng + (ok - ng) / 2;
+    if (key > ai[mid]) {
+      ng = mid;
+    } else {
+      ok = mid;
+    }
+  }
+  return ok;
 }
 }  // namespace me
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  ll n;
+  cin >> n;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  vector<int> ai(n), bi(n), ci(n);
+  rep(i, n) cin >> ai[i];
+  rep(i, n) cin >> bi[i];
+  rep(i, n) cin >> ci[i];
+  sort(all(ai));
+  sort(all(bi));
+  sort(all(ci));
 
+  dump(ai);
+  dump(bi);
+  dump(ci);
+
+  ll ans{};
   rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+    int b = bi[i];
+    ll a = me::upper_bound(ai, b);
+    ll c = me::lower_bound(ci, b);
+    ans += a * (n - c);
   }
+
+  cout << ans << el;
 }

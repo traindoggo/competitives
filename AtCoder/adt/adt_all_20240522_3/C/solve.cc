@@ -32,31 +32,31 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
+int length(string s) {
+  set<string> one{"AB", "BC", "CD", "DE", "EA"};
+
+  string k = s;
+  reverse(all(k));
+
+  dump(s);
+  dump(k);
+
+  if (one.contains(s) || one.contains(k)) {
+    return 1;
   }
-  return right;
+
+  return 2;
 }
-}  // namespace me
-
 int main() {
-  int n, m;
-  cin >> n >> m;
+  string s, t;
+  cin >> s >> t;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  int l = length(s);
+  int r = length(t);
 
-  rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+  if (l == r) {
+    cout << "Yes" << el;
+  } else {
+    cout << "No" << el;
   }
 }

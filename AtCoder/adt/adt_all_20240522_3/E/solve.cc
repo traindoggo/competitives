@@ -32,31 +32,49 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-  }
-  return right;
-}
-}  // namespace me
+using Graph = vector<vector<int>>;
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n, x, y;
+  cin >> n >> x >> y;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  Graph graph(n);
+  rep(_, n - 1) {
+    int from, to;
+    cin >> from >> to;
+    from--, to--;
 
-  rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+    graph[from].push_back(to);
+    graph[to].push_back(from);
+  }
+
+  vector<int> path, trace;
+  path.push_back(x - 1);
+  vector<bool> seen(n, false);
+
+  auto dfs = [&](auto f, int sv) {
+    seen[sv] = true;
+
+    if (sv == y - 1) {
+      trace = path;
+      return;
+    }
+
+    for (auto& nv : graph[sv]) {
+      if (seen[nv]) continue;
+      path.push_back(nv);
+      f(f, nv);
+      path.pop_back();
+    }
+  };
+
+  dfs(dfs, x - 1);
+
+  dump(path);
+  dump(trace);
+
+  int size = (int)trace.size();
+  rep(i, size) {
+    cout << trace[i] + 1 << (i != size - 1 ? ' ' : '\n');
   }
 }

@@ -16,7 +16,6 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -32,31 +31,34 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-  }
-  return right;
-}
-}  // namespace me
-
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int n;
+  cin >> n;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  vector<ll> ai(n);
+  rep(i, n) cin >> ai[i];
+
+  map<ll, ll> counter;
+  for (const ll& a : ai) {
+    counter[a]++;
+  }
+
+  vector<ll> bi = ai;
+  sort(all(bi));
+  bi.erase(unique(all(bi)), bi.end());
+  sort(rall(bi));
+
+  dump(bi);
+
+  map<ll, ll> mp;
+  ll prev{};
+
+  for (const ll& b : bi) {
+    mp[b] = prev;
+    prev += b * counter[b];
+  }
 
   rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+    cout << mp[ai[i]] << (i == n - 1 ? el : ' ');
   }
 }

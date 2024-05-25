@@ -16,7 +16,6 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -32,31 +31,35 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-namespace me {
-int lower_bound(const vector<int>& ai, int key) {
-  int left{-1}, right{(int)ai.size()};
-  while (right - left > 1) {
-    int mid = left + (right - left) / 2;
-    if (ai[mid] >= key) {
-      right = mid;
-    } else {
-      left = mid;
-    }
-  }
-  return right;
-}
-}  // namespace me
+using P = pair<pair<int, int>, int>;
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  int H, W, n;
+  cin >> H >> W >> n;
 
-  vector<int> ai(m);
-  rep(i, m) cin >> ai[i];
+  vector<int> ys, xs;
 
   rep(i, n) {
-    int day = i + 1;
-    int idx = me::lower_bound(ai, day);
-    cout << ai[idx] - day << el;
+    int y, x;
+    cin >> y >> x;
+
+    ys.push_back(y);
+    xs.push_back(x);
+  }
+
+  auto conv = [](const vector<int> ai) -> map<int, int> {
+    map<int, int> mp;
+    set<int> st{ai.begin(), ai.end()};
+    int idx{1};
+    for (auto a : st) {
+      mp[a] = idx++;
+    }
+    return mp;
+  };
+
+  map<int, int> yy = conv(ys), xx = conv(xs);
+
+  rep(i, n) {
+    cout << yy[ys[i]] << ' ' << xx[xs[i]] << el;
   }
 }
