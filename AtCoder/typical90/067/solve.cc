@@ -29,23 +29,44 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 }
 
 using ll = long long int;
+using ull = unsigned long long int;
+
 // clang-format on
 
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  string n;
+  cin >> n;
 
-  vector<ll> ai(n), bi(n);
-  rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
+  int k;
+  cin >> k;
 
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
+  auto conv = [](string str) -> string {
+    // 8 to 10
+    unsigned long long base10{};
+    for (auto& ch : str) {
+      base10 *= 8;
+      base10 += (ull)(ch - '0');
+    }
 
-  if (diff > k) die("No");
+    // 10 to 9
+    string ans{""};
+    while (base10 > 0) {
+      ans = (char)(base10 % 9 + '0') + ans;
+      base10 /= 9;
+    }
+    for (char& ch : ans) {
+      if (ch == '8') {
+        ch = '5';
+      }
+    }
 
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
+    return ans;
+  };
+
+  // n = 0;
+  rep(_, k) n = conv(n);
+  if (n == "")
+    cout << 0 << el;
   else
-    cout << "No" << el;
+    cout << n << el;
 }

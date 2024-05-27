@@ -32,20 +32,11 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  int h, w;
+  cin >> h >> w;
 
-  vector<ll> ai(n), bi(n);
-  rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
-
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
-
-  if (diff > k) die("No");
-
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
+  if (h == 1 || w == 1)
+    cout << h * w << el;
   else
-    cout << "No" << el;
+    cout << ((h + 1) / 2) * ((w + 1) / 2) << el;
 }

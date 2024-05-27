@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
+
+#include <atcoder/modint>
 using namespace std;
+using namespace atcoder;
 
 #ifdef DEBUG_
 #include <compe/debug.hpp>
@@ -31,21 +34,34 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using mint = modint;
+
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  ll n, p, q;
+  cin >> n >> p >> q;
 
-  vector<ll> ai(n), bi(n);
+  vector<ll> ai(n);
   rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
 
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
+  mint ans;
+  ans.set_mod((int)p);
+  ll cnt{};
 
-  if (diff > k) die("No");
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
+      for (int k = j + 1; k < n; ++k) {
+        for (int l = k + 1; l < n; ++l) {
+          for (int m = l + 1; m < n; ++m) {
+            ans = ai[i];
+            ans = ans * ai[j] * ai[k] * ai[l] * ai[m];
+            if (ans == q) {
+              cnt++;
+            }
+          }
+        }
+      }
+    }
+  }
 
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
-  else
-    cout << "No" << el;
+  cout << cnt << el;
 }

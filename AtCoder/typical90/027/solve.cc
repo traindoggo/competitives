@@ -32,20 +32,17 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  int n;
+  cin >> n;
 
-  vector<ll> ai(n), bi(n);
-  rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
+  set<string> names;
+  rep(i, n) {
+    string name;
+    cin >> name;
 
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
-
-  if (diff > k) die("No");
-
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
-  else
-    cout << "No" << el;
+    if (!names.contains(name)) {
+      cout << i + 1 << el;
+    }
+    names.insert(name);
+  }
 }

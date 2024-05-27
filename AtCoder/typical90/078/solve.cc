@@ -31,21 +31,37 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using Graph = vector<vector<int>>;
+
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  int n, m;
+  cin >> n >> m;
 
-  vector<ll> ai(n), bi(n);
-  rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
+  // undirected unweighted graph
+  Graph graph(n);
 
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
+  rep(_, m) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
+    graph[a].push_back(b);
+    graph[b].push_back(a);
+  }
 
-  if (diff > k) die("No");
+  int cnt{};
 
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
-  else
-    cout << "No" << el;
+  rep(i, n) {
+    int c{};
+    for (const int& nv : graph[i]) {
+      if (i > nv) {
+        c++;
+      }
+    }
+
+    if (c == 1) {
+      cnt++;
+    }
+  }
+
+  cout << cnt << el;
 }

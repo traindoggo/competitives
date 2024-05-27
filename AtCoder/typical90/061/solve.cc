@@ -32,20 +32,20 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  ll n, k;
-  cin >> n >> k;
+  deque<int> que;
 
-  vector<ll> ai(n), bi(n);
-  rep(i, n) cin >> ai[i];
-  rep(i, n) cin >> bi[i];
+  int q;
+  cin >> q;
+  rep(i, q) {
+    int t, x;
+    cin >> t >> x;
 
-  ll diff{};
-  rep(i, n) diff += abs(ai[i] - bi[i]);
-
-  if (diff > k) die("No");
-
-  if (diff % 2 == k % 2)
-    cout << "Yes" << el;
-  else
-    cout << "No" << el;
+    if (t == 1) {
+      que.push_front(x);
+    } else if (t == 2) {
+      que.push_back(x);
+    } else {
+      cout << que[x - 1] << el;
+    }
+  }
 }
