@@ -10,13 +10,12 @@ using namespace std;
 // clang-format off
 struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
-#define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) do{cout<<(msg)<<'\n',exit(0);}while(0)
 #define el '\n'
+#define rep(i,n) for (int i=0;i<(int)n;++i)
+#define die(msg) cout<<(msg)<<el;exit(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
-
 #define INFi  1   << 30
 #define INFll 1LL << 60
 #define MOD17 10'0000'0007
@@ -36,29 +35,26 @@ int main() {
   int n;
   cin >> n;
 
-  vector<int> c1(n), c2(n);
+  vector ps(2, vector<int>(n, 0));
   rep(i, n) {
-    int c, b;
-    cin >> c >> b;
-
-    if (c == 1) {
-      c1[i] = b;
-    } else {
-      c2[i] = b;
-    }
+    int c, p;
+    cin >> c >> p;
+    ps[c - 1][i] = p;
   }
-  vector<int> acc1(n + 1), acc2(n + 1);
-  rep(i, n) acc1[i + 1] = acc1[i] + c1[i];
-  rep(i, n) acc2[i + 1] = acc2[i] + c2[i];
+
+  vector acc(2, vector<int>(n + 1, 0));
+  rep(i, n) {
+    acc[0][i + 1] = acc[0][i] + ps[0][i];
+    acc[1][i + 1] = acc[1][i] + ps[1][i];
+  }
 
   int q;
   cin >> q;
   rep(_, q) {
     int l, r;
     cin >> l >> r;
-
-    int sum1 = acc1[r] - acc1[l - 1];
-    int sum2 = acc2[r] - acc2[l - 1];
-    cout << sum1 << ' ' << sum2 << el;
+    int class1 = acc[0][r] - acc[0][l - 1];
+    int class2 = acc[1][r] - acc[1][l - 1];
+    cout << class1 << ' ' << class2 << el;
   }
 }
