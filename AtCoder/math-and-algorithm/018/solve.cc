@@ -32,32 +32,15 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  int n;
+  cin >> n;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  vector<int> ai(n);
+  rep(i, n) cin >> ai[i];
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
+  vector<ll> counter(4, 0);
+  for (const int& a : ai) {
+    counter[a / 100 - 1]++;
   }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
-    }
-    cout << el;
-  }
+  cout << counter[0] * counter[3] + counter[1] * counter[2] << el;
 }

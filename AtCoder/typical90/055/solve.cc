@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
+
+#include <atcoder/modint>
 using namespace std;
+using namespace atcoder;
 
 #ifdef DEBUG_
 #include <compe/debug.hpp>
@@ -12,7 +15,7 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define el '\n'
 #define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) cout<<(msg)<<el;exit(0);
+#define die(msg) do{cout<<(msg)<<el;exit(0);}while(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
@@ -31,33 +34,34 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using mint = modint;
+
 int main() {
-  int h, w;
-  cin >> h >> w;
+  ll n, p, q;
+  cin >> n >> p >> q;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  vector<ll> ai(n);
+  rep(i, n) cin >> ai[i];
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
+  mint ans;
+  ans.set_mod((int)p);
+  ll cnt{};
 
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
+      for (int k = j + 1; k < n; ++k) {
+        for (int l = k + 1; l < n; ++l) {
+          for (int m = l + 1; m < n; ++m) {
+            ans = ai[i];
+            ans = ans * ai[j] * ai[k] * ai[l] * ai[m];
+            if (ans == q) {
+              cnt++;
+            }
+          }
+        }
+      }
     }
-    cout << el;
   }
+
+  cout << cnt << el;
 }

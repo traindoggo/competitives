@@ -32,32 +32,23 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  ll n;
+  cin >> n;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  map<ll, int> factors;
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+  for (ll i = 2; i * i <= n; ++i) {
+    while (n % i == 0) {
+      factors[i]++;
+      n /= i;
     }
-    cout << el;
+  }
+
+  if (n != 1) {
+    factors[n]++;
+  }
+
+  for (auto& [num, cnt] : factors) {
+    rep(_, cnt) cout << num << el;
   }
 }

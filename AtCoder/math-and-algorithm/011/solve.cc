@@ -31,33 +31,28 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+bool is_prime(int n) {
+  if (n == 2 || n == 3) return true;
+  if (n % 2 == 0 || n % 3 == 0) return false;
+
+  for (int i = 3; i * i <= n; i += 2) {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+
 int main() {
-  int h, w;
-  cin >> h >> w;
+  int n;
+  cin >> n;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
-
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+  vector<int> ans;
+  for (int i = 2; i <= n; ++i) {
+    if (is_prime(i)) {
+      ans.push_back(i);
     }
-    cout << el;
+  }
+
+  for (const int& a : ans) {
+    cout << a << el;
   }
 }

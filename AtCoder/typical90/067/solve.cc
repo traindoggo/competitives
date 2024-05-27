@@ -12,7 +12,7 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define el '\n'
 #define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) cout<<(msg)<<el;exit(0);
+#define die(msg) do{cout<<(msg)<<el;exit(0);}while(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
@@ -29,35 +29,44 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 }
 
 using ll = long long int;
+using ull = unsigned long long int;
+
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  string n;
+  cin >> n;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  int k;
+  cin >> k;
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+  auto conv = [](string str) -> string {
+    // 8 to 10
+    unsigned long long base10{};
+    for (auto& ch : str) {
+      base10 *= 8;
+      base10 += (ull)(ch - '0');
     }
-    cout << el;
-  }
+
+    // 10 to 9
+    string ans{""};
+    while (base10 > 0) {
+      ans = (char)(base10 % 9 + '0') + ans;
+      base10 /= 9;
+    }
+    for (char& ch : ans) {
+      if (ch == '8') {
+        ch = '5';
+      }
+    }
+
+    return ans;
+  };
+
+  // n = 0;
+  rep(_, k) n = conv(n);
+  if (n == "")
+    cout << 0 << el;
+  else
+    cout << n << el;
 }

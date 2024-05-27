@@ -12,7 +12,7 @@ struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
 #define el '\n'
 #define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) cout<<(msg)<<el;exit(0);
+#define die(msg) do{cout<<(msg)<<el;exit(0);}while(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
@@ -32,32 +32,20 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  deque<int> que;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  int q;
+  cin >> q;
+  rep(i, q) {
+    int t, x;
+    cin >> t >> x;
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+    if (t == 1) {
+      que.push_front(x);
+    } else if (t == 2) {
+      que.push_back(x);
+    } else {
+      cout << que[x - 1] << el;
     }
-    cout << el;
   }
 }

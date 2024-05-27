@@ -31,33 +31,26 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+namespace me {
+ll gcd(ll a, ll b) {
+  if (b == 0) return a;
+  if (a < b) {
+    swap(a, b);
+  }
+  return gcd(b, a % b);
+}
+}  // namespace me
+
 int main() {
-  int h, w;
-  cin >> h >> w;
+  int n;
+  cin >> n;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  vector<ll> ai(n);
+  rep(i, n) cin >> ai[i];
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
+  ll ans{ai.front()};
+  for (const ll& a : ai) {
+    ans = gcd(ans, a);
   }
-
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
-
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
-    }
-    cout << el;
-  }
+  cout << ans << el;
 }

@@ -31,33 +31,45 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
+using Graph = vector<vector<int>>;
+
 int main() {
-  int h, w;
-  cin >> h >> w;
+  int n, t;
+  cin >> n >> t;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  vector<int> ai(t);
+  rep(i, t) cin >> ai[i], ai[i]--;
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
+  vector<int> rows(2 * n, 0), cols(2 * n, 0);
+  // 左上から右下, 左下から右上
+  ll diag1{0}, diag2{0};
 
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
+  rep(tt, t) {
+    int a = ai[tt];
+    int row = a / n;
+    int col = a % n;
 
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+    if (row == col) {
+      diag1++;
     }
-    cout << el;
+
+    if (row + col == n - 1) {
+      diag2++;
+    }
+
+    rows[row]++;
+    cols[col]++;
+
+    if (diag1 >= n) {
+      die(tt + 1);
+    } else if (diag2 >= n) {
+      die(tt + 1);
+    } else if (rows[row] >= n) {
+      die(tt + 1);
+    } else if (cols[col] >= n) {
+      die(tt + 1);
+    }
   }
+
+  cout << -1 << el;
 }

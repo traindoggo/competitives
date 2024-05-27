@@ -32,32 +32,28 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int h, w;
-  cin >> h >> w;
+  int n, m;
+  cin >> n >> m;
 
-  vector<vector<int>> cells(h, vector<int>(w, 0));
-  rep(i, h) rep(j, w) cin >> cells[i][j];
+  vector<int> ai(n), bi(m);
+  rep(i, n) cin >> ai[i];
+  rep(i, m) cin >> bi[i];
 
-  vector<int> row(h), col(w);
-  rep(i, h) {
-    int sum{};
-    rep(j, w) sum += cells[i][j];
-    row[i] = sum;
-  }
+  vector<int> ci;
+  rep(i, n) ci.push_back(ai[i]);
+  rep(i, m) ci.push_back(bi[i]);
+  sort(all(ci));
+  dump(ci);
 
-  rep(j, w) {
-    int sum{};
-    rep(i, h) sum += cells[i][j];
-    col[j] = sum;
-  }
+  set<int> st{ai.begin(), ai.end()};
+  dump(st);
 
-  rep(i, h) {
-    rep(j, w) {
-      int sum = row[i] + col[j] - cells[i][j];
-
-      cout << sum;
-      if (j < w - 1) cout << ' ';
+  int size = (int)ci.size();
+  rep(i, size - 1) {
+    if (st.contains(ci[i]) && st.contains(ci[i + 1])) {
+      die("Yes");
     }
-    cout << el;
   }
+
+  cout << "No" << el;
 }
