@@ -31,35 +31,16 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-vector<bool> create_eratosthenes(int n) {
-  vector<bool> sheet(n + 1, true);
-
-  sheet[0] = false;
-  sheet[1] = false;
-
-  for (int p = 2; p <= n; ++p) {
-    if (!sheet[p]) continue;
-
-    for (int q = p * 2; q <= n; q += p) {
-      sheet[q] = false;
-    }
-  }
-
-  return sheet;
+namespace me {
+int gcd(int a, int b) {
+  if (b == 0) return a;
+  if (a < b) swap(a, b);
+  return gcd(b, a % b);
 }
+}  // namespace me
 
 int main() {
-  auto is_prime = create_eratosthenes(300'000);
-
-  int q;
-  cin >> q;
-  rep(_, q) {
-    int x;
-    cin >> x;
-
-    if (is_prime[x])
-      cout << "Yes" << el;
-    else
-      cout << "No" << el;
-  }
+  int a, b;
+  cin >> a >> b;
+  cout << me::gcd(a, b) << el;
 }

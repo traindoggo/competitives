@@ -31,35 +31,26 @@ template <typename T> inline bool chmin(T& a, const T& b) {
 using ll = long long int;
 // clang-format on
 
-vector<bool> create_eratosthenes(int n) {
-  vector<bool> sheet(n + 1, true);
+bool is_prime(int n) {
+  if (n == 2 || n == 3) return true;
+  if (n % 2 == 0 || n % 3 == 0) return false;
+  for (int i = 2; i * i <= n; ++i) {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+int main() {
+  int n;
+  cin >> n;
 
-  sheet[0] = false;
-  sheet[1] = false;
-
-  for (int p = 2; p <= n; ++p) {
-    if (!sheet[p]) continue;
-
-    for (int q = p * 2; q <= n; q += p) {
-      sheet[q] = false;
+  set<int> st;
+  for (int i = 2; i <= n; ++i) {
+    if (is_prime(i)) {
+      st.insert(i);
     }
   }
 
-  return sheet;
-}
-
-int main() {
-  auto is_prime = create_eratosthenes(300'000);
-
-  int q;
-  cin >> q;
-  rep(_, q) {
-    int x;
-    cin >> x;
-
-    if (is_prime[x])
-      cout << "Yes" << el;
-    else
-      cout << "No" << el;
+  for (const int& prime : st) {
+    cout << prime << el;
   }
 }
