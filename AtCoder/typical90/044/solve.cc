@@ -32,14 +32,24 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  ll a, b;
-  cin >> a >> b;
+  int n, q;
+  cin >> n >> q;
 
-  const ll threshold = 1'000'000'000'000'000'000LL;
+  vector<int> ai(n);
+  for (auto& a : ai) cin >> a;
 
-  if (a / gcd(a, b) > threshold / b) {
-    cout << "Large" << el;
-  } else {
-    cout << lcm(a, b) << el;
+  int idx{};
+  rep(_, q) {
+    int t, x, y;
+    cin >> t >> x >> y;
+    x--, y--;
+
+    if (t == 1) {
+      swap(ai[(x + idx) % n], ai[(y + idx) % n]);
+    } else if (t == 2) {
+      idx = (idx - 1 + n) % n;
+    } else {
+      cout << ai[(x + idx) % n] << el;
+    }
   }
 }
