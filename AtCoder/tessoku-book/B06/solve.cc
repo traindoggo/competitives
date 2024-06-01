@@ -10,9 +10,9 @@ using namespace std;
 // clang-format off
 struct  Fast{Fast(){std::cin.tie(0);ios::sync_with_stdio(false);}} fast;
 
-#define rep(i,n) for (int i=0;i<(int)n;++i)
-#define die(msg) do{cout<<(msg)<<'\n',exit(0);}while(0)
 #define el '\n'
+#define rep(i,n) for (int i=0;i<(int)n;++i)
+#define die(msg) do{cout<<(msg)<<el;exit(0);}while(0);
 
 #define all(k)  k.begin(),  k.end()
 #define rall(k) k.rbegin(), k.rend()
@@ -34,17 +34,10 @@ using ll = long long int;
 int main() {
   int n;
   cin >> n;
-  vector<int> ai(n);
-  rep(i, n) cin >> ai[i];
 
-  vector<int> acc(n + 1);
-  rep(i, n) {
-    if (ai[i] == 1) {
-      acc[i + 1] = acc[i] + 1;
-    } else {
-      acc[i + 1] = acc[i];
-    }
-  }
+  vector<int> ai(n), acc(n + 1);
+  rep(i, n) cin >> ai[i];
+  rep(i, n) acc[i + 1] = acc[i] + ai[i];
 
   int q;
   cin >> q;
@@ -52,24 +45,15 @@ int main() {
     int l, r;
     cin >> l >> r;
 
-    int day = r - l + 1;
-    int rot = acc[r] - acc[l - 1];
+    int hit = acc[r] - acc[l - 1];
+    int days = r - l + 1;
+    int loss = days - hit;
 
-    if (day % 2 == 0) {
-      if (day / 2 == rot) {
-        cout << "draw" << el;
-      } else if (day / 2 > rot) {
-        cout << "lose" << el;
-      } else {
-        cout << "win" << el;
-      }
-    } else {
-      if (day / 2 >= rot) {
-        cout << "lose" << el;
-      } else {
-        cout << "win" << el;
-      }
-    }
-    dump(day, rot);
+    if (hit == loss)
+      cout << "draw" << el;
+    else if (hit > loss)
+      cout << "win" << el;
+    else
+      cout << "lose" << el;
   }
 }
