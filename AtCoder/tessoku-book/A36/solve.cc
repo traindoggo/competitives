@@ -32,29 +32,18 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n;
-  cin >> n;
+  ll n, k;
+  cin >> n >> k;
 
-  vector<int> ai(n - 1), bi(n - 2);
-  rep(i, n - 1) cin >> ai[i];
-  rep(i, n - 2) cin >> bi[i];
+  ll steps = (n - 1) * 2;
 
-  dump(ai);
-  dump(bi);
-
-  vector<int> dp(n, INFi);
-  dp[0] = 0;
-
-  rep(i, n) {
-    if (i < n - 1) {
-      chmin(dp[i + 1], dp[i] + ai[i]);
-    }
-
-    if (i < n - 2) {
-      chmin(dp[i + 2], dp[i] + bi[i]);
-    }
-    dump(dp);
+  if (steps > k) {
+    die("No");
   }
 
-  cout << dp[n - 1] << el;
+  if (k % 2 == 0) {
+    cout << "Yes" << el;
+  } else {
+    cout << "No" << el;
+  }
 }

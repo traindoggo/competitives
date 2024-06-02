@@ -32,29 +32,23 @@ using ll = long long int;
 // clang-format on
 
 int main() {
-  int n;
-  cin >> n;
+  ll n, m, b;
+  cin >> n >> m >> b;
 
-  vector<int> ai(n - 1), bi(n - 2);
-  rep(i, n - 1) cin >> ai[i];
-  rep(i, n - 2) cin >> bi[i];
+  vector<ll> ai(n), ci(m);
+  rep(i, n) cin >> ai[i];
+  rep(i, m) cin >> ci[i];
 
   dump(ai);
-  dump(bi);
+  dump(ci);
 
-  vector<int> dp(n, INFi);
-  dp[0] = 0;
+  ll ans{};
 
-  rep(i, n) {
-    if (i < n - 1) {
-      chmin(dp[i + 1], dp[i] + ai[i]);
-    }
-
-    if (i < n - 2) {
-      chmin(dp[i + 2], dp[i] + bi[i]);
-    }
-    dump(dp);
+  ll sum_c{};
+  for (const ll& c : ci) sum_c += c;
+  for (const ll& a : ai) {
+    ans += (a + b) * m + sum_c;
   }
 
-  cout << dp[n - 1] << el;
+  cout << ans << el;
 }
