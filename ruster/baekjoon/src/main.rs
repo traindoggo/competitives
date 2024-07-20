@@ -1,17 +1,27 @@
-use std::io::{stdout, BufWriter, Write};
+#[allow(unused)]
+use std::io::{self, BufReader};
 
 #[allow(unused)]
-use proconio::{input, marker::Chars};
+use proconio::{input, marker::Chars, source::line::LineSource};
 
 fn main() {
+    let mut stdin = LineSource::new(BufReader::new(io::stdin()));
+    macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
+
     input! {
-        n: i32,
+        n: usize,
     }
 
-    let out = stdout();
-    let mut out = BufWriter::new(out.lock());
+    for _ in 0..n {
+        input! {
+            d: usize,
+            si: [String; d],
+        }
 
-    for i in 1..=n {
-        out.write(format!("{}\n", i).as_bytes()).unwrap();
+        println!("{}", d);
+        for s in si {
+            println!("{}", s);
+        }
+        return;
     }
 }
