@@ -3,18 +3,9 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-       s: Chars,
+        n: i32,
     }
 
-    let ans: String = s
-        .iter()
-        .map(|ch| {
-            if ch.is_ascii_lowercase() {
-                ch.to_ascii_uppercase()
-            } else {
-                ch.to_ascii_lowercase()
-            }
-        })
-        .collect::<String>();
-    println!("{}", ans);
+    let is_leapyear: bool = (n % 4 == 0 && n % 100 != 0) || n % 400 == 0;
+    println!("{}", if is_leapyear { 1 } else { 0 });
 }
