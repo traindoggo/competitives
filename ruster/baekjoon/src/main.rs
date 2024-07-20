@@ -1,23 +1,23 @@
 #[allow(unused)]
-use proconio::{input, marker::Chars};
+use std::io::{self, BufReader};
+
+#[allow(unused)]
+use proconio::{input, marker::Chars, source::line::LineSource};
 
 fn main() {
-    input! {
-        nums: [i32; 6],
+    let mut stdin = LineSource::new(BufReader::new(io::stdin()));
+    macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
+
+    loop {
+        input! {
+            a: i32,
+            b: i32,
+        }
+
+        if a == 0 && b == 0 {
+            break;
+        }
+
+        println!("{}", if a <= b { "No" } else { "Yes" })
     }
-
-    let mut ans: Vec<i32> = vec![];
-
-    let chess_piece = vec![1, 1, 2, 2, 2, 8];
-    for (idx, num) in nums.iter().enumerate() {
-        ans.push(chess_piece[idx] - num);
-    }
-
-    println!(
-        "{}",
-        ans.iter()
-            .map(|num| num.to_string())
-            .collect::<Vec<_>>()
-            .join(" ")
-    )
 }
