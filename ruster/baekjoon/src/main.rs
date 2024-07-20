@@ -5,13 +5,28 @@ use std::io::{self, BufReader};
 use proconio::{input, marker::Chars, source::line::LineSource};
 
 fn main() {
-    //let mut stdin = LineSource::new(BufReader::new(io::stdin()));
-    //macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
-    input! {
-        a: i32,
-        b: i32,
-        c: i32,
-    }
+    let mut stdin = LineSource::new(BufReader::new(io::stdin()));
+    macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
+    loop {
+        input! {
+            n: usize,
+        }
 
-    println!("{}", a * b + c);
+        if n == 0 {
+            break;
+        }
+
+        input! {
+            ai: [i32; n],
+        }
+
+        let mut mx: i32 = 0;
+
+        for w in ai.windows(3) {
+            let sum = w.into_iter().sum::<i32>();
+            mx = mx.max(sum);
+        }
+
+        println!("{}", mx);
+    }
 }
