@@ -8,8 +8,10 @@ fn main() {
     //let mut stdin = LineSource::new(BufReader::new(io::stdin()));
     //macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
     input! {
-        x: i32,
+        a: i32,
+        b: i32,
+        c: i32,
     }
 
-    println!("{}", if x % 7 == 2 { 1 } else { 0 });
+    println!("{}", a * b + c);
 }
