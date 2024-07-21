@@ -8,10 +8,10 @@ fn main() {
     //let mut stdin = LineSource::new(BufReader::new(io::stdin()));
     //macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
     input! {
-        n: usize,
+        n: i32,
+        s: i32,
     }
 
-    for i in 0..n {
-        println!("{}", "*".repeat(n - i));
-    }
+    let diff = s - n;
+    println!("{}", n + 2 * diff);
 }
