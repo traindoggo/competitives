@@ -8,11 +8,13 @@ fn main() {
     //let mut stdin = LineSource::new(BufReader::new(io::stdin()));
     //macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
     input! {
-        n: usize,
-        nums: [(i32, i32); n],
+        _: usize,
+        digits: Chars,
     }
 
-    for (a, b) in nums {
-        println!("{}", a + b);
+    let mut ans: i32 = 0;
+    for d in digits {
+        ans += (d as u8 - '0' as u8) as i32;
     }
+    println!("{}", ans);
 }
