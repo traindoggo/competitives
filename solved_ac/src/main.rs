@@ -3,21 +3,19 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        a: i64,
-        b: i64,
-        c: i64,
+        h:i32,
+        m:i32,
     }
 
-    let mut counter = vec![0; 10];
-    let res = (a * b * c).to_string();
+    let mut total: i32 = h * 60 + m;
+    eprintln!("{}", total);
 
-    for ch in res.chars() {
-        let idx = (ch as u8 - '0' as u8) as usize;
-        counter[idx] += 1;
-    }
-    eprintln!("{:?}", counter);
+    total -= 45;
+    total += 24 * 60;
+    total %= 24 * 60;
 
-    for c in counter {
-        println!("{}", c);
-    }
+    let h = total / 60;
+    total %= 60;
+    let m = total;
+    println!("{} {}", h, m);
 }
