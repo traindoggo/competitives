@@ -2,12 +2,15 @@
 use proconio::{input, marker::Chars};
 
 fn main() {
-    input! {
-        n: usize,
-        si: [(i32, i32); n],
-    }
+    loop {
+        input! {
+            a: i32,
+            b: i32,
+        }
 
-    for (a, b) in si {
+        if a == 0 && b == 0 {
+            break;
+        }
         println!("{}", a + b);
     }
 }
