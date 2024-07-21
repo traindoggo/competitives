@@ -3,13 +3,23 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        a: i32,
-        b: i32,
+        n: usize,
+        x: i32,
+        nums: [i32; n],
     }
 
-    println!("{}", a + b);
-    println!("{}", a - b);
-    println!("{}", a * b);
-    println!("{}", a / b);
-    println!("{}", a % b);
+    let mut ans: Vec<i32> = Vec::new();
+    for num in nums {
+        if num < x {
+            ans.push(num);
+        }
+    }
+
+    println!(
+        "{}",
+        ans.iter()
+            .map(|n| n.to_string())
+            .collect::<Vec<_>>()
+            .join(" ")
+    );
 }
