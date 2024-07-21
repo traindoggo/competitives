@@ -12,5 +12,5 @@ fn main() {
         y: i32,
     }
 
-    println!("{}", x + y + 3);
+    println!("{}", x * 60 + y);
 }
