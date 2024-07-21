@@ -3,22 +3,18 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        n: usize,
-        marks: [Chars;n],
+        t: usize,
+        nums: [(i32, i32, i32); t],
     }
 
-    for line in marks {
-        let mut total: i32 = 0;
-        let mut cnt: i32 = 0;
+    for (h, _, n) in nums {
+        let (height, room) = if n % h == 0 {
+            (h, n / h)
+        } else {
+            (n % h, n / h + 1)
+        };
 
-        for ch in line {
-            if ch == 'O' {
-                cnt += 1;
-            } else {
-                cnt = 0;
-            }
-            total += cnt;
-        }
-        println!("{}", total);
+        let ans = height * 100 + room;
+        println!("{}", ans);
     }
 }
