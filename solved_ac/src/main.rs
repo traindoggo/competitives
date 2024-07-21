@@ -3,19 +3,9 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        t: usize,
-        si: [(i32, Chars); t],
+        n: usize,
+        si: [i32; n],
     }
 
-    for (n, s) in si {
-        let mut ans = String::new();
-
-        for ch in s {
-            for _ in 0..n {
-                ans.push(ch);
-            }
-        }
-
-        println!("{}", ans);
-    }
+    println!("{} {}", si.iter().min().unwrap(), si.iter().max().unwrap());
 }
