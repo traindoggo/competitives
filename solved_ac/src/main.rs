@@ -2,10 +2,14 @@
 use proconio::{input, marker::Chars};
 
 fn main() {
-    let ans = r#"|\_/|
-|q p|   /}
-( 0 )"""\
-|"^"`    |
-||_/=\\__|"#;
-    println!("{}", ans);
+    input! {
+        a: i32,
+        b: i32,
+    }
+
+    println!("{}", a + b);
+    println!("{}", a - b);
+    println!("{}", a * b);
+    println!("{}", a / b);
+    println!("{}", a % b);
 }
