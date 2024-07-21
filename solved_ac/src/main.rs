@@ -3,19 +3,19 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        nums: [i32; 9],
+        t: usize,
+        si: [(i32, Chars); t],
     }
 
-    let mut mx: i32 = 0;
-    let mut idx: usize = 0;
+    for (n, s) in si {
+        let mut ans = String::new();
 
-    for i in 0..nums.len() {
-        if mx < nums[i] {
-            mx = nums[i];
-            idx = i;
+        for ch in s {
+            for _ in 0..n {
+                ans.push(ch);
+            }
         }
-    }
 
-    println!("{}", mx);
-    println!("{}", idx + 1);
+        println!("{}", ans);
+    }
 }
