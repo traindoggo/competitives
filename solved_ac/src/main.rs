@@ -3,30 +3,21 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        a: String,
-        b: String,
-        c: String,
+        a: i64,
+        b: i64,
+        c: i64,
     }
 
-    add1(&a, &b, &c);
-    add2(&a, &b, &c);
-}
+    let mut counter = vec![0; 10];
+    let res = (a * b * c).to_string();
 
-fn add1(a: &String, b: &String, c: &String) {
-    let mut sum: i32 = 0;
-    sum += a.parse::<i32>().unwrap();
-    sum += b.parse::<i32>().unwrap();
-    sum -= c.parse::<i32>().unwrap();
-    println!("{}", sum);
-}
+    for ch in res.chars() {
+        let idx = (ch as u8 - '0' as u8) as usize;
+        counter[idx] += 1;
+    }
+    eprintln!("{:?}", counter);
 
-fn add2(a: &String, b: &String, c: &String) {
-    let mut k = String::new();
-    k.push_str(a);
-    k.push_str(b);
-
-    let mut sum: i32 = 0;
-    sum += k.parse::<i32>().unwrap();
-    sum -= c.parse::<i32>().unwrap();
-    println!("{}", sum);
+    for c in counter {
+        println!("{}", c);
+    }
 }
