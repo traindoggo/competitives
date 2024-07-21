@@ -3,19 +3,32 @@ use proconio::{input, marker::Chars};
 
 fn main() {
     input! {
-        h:i32,
-        m:i32,
+        si: [i32; 8],
     }
 
-    let mut total: i32 = h * 60 + m;
-    eprintln!("{}", total);
+    let mut is_ascending = true;
+    for i in 1..=8 {
+        if si[i - 1] != i as i32 {
+            is_ascending = false;
+        }
+    }
 
-    total -= 45;
-    total += 24 * 60;
-    total %= 24 * 60;
+    if is_ascending {
+        println!("ascending");
+        return;
+    }
 
-    let h = total / 60;
-    total %= 60;
-    let m = total;
-    println!("{} {}", h, m);
+    let mut is_descending = true;
+    for i in 1..=8 {
+        if si[i - 1] != 9 - i as i32 {
+            is_descending = false;
+        }
+    }
+
+    if is_descending {
+        println!("descending");
+        return;
+    }
+
+    println!("mixed");
 }
