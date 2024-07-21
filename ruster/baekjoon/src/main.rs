@@ -9,13 +9,10 @@ fn main() {
     //macro_rules! input(($($tt:tt)*) => (proconio::input!(from &mut stdin, $($tt)*)));
     input! {
         n: usize,
+        nums: [(i32, i32); n],
     }
 
-    for _ in 0..n {
-        input! {
-            a: i64,
-            b: i64,
-        }
+    for (a, b) in nums {
         println!("{}", a + b);
     }
 }
