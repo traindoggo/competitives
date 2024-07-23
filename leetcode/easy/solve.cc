@@ -41,36 +41,47 @@ using ll = long long int;
 
 class Solution {
 public:
-  int romanToInt(string s) {
-    map<char, int> mp{{'I', 1},   {'V', 5},   {'X', 10},  {'L', 50},
-                      {'C', 100}, {'D', 500}, {'M', 1000}};
-    s = std::regex_replace(s, regex("CM"), "CCCCCCCCC");
-    s = std::regex_replace(s, regex("CD"), "CCCC");
-    s = std::regex_replace(s, regex("XC"), "XXXXXXXXX");
-    s = std::regex_replace(s, regex("XL"), "XXXX");
-    s = std::regex_replace(s, regex("IX"), "IIIIIIIII");
-    s = std::regex_replace(s, regex("IV"), "IIII");
-
-    int sum{};
-    for (const char& ch : s) {
-      sum += mp[ch];
+  string longestCommonPrefix(vector<string>& strs) {
+    size_t size{201};
+    for (const string& s : strs) {
+      size = min(size, s.size());
     }
-    cerr << s << ' ' << sum << el;
-    return sum;
-  };
+    size_t length = strs.size();
+
+    string ans{};
+
+    rep(i, size) {
+      bool is_same{true};
+      char ch = strs[0][i];
+
+      rep(j, length) {
+        if (strs[j][i] != ch) {
+          is_same = false;
+        }
+      }
+
+      if (is_same) {
+        ans.push_back(ch);
+      } else {
+        return ans;
+      }
+    }
+
+    return ans;
+  }
 };
 
 int main() {
-  vector<pair<string, int>> vps{
-      make_pair("III", 3),
-      make_pair("LVIII", 58),
-      make_pair("MCDLXXVI", 1476),
-      make_pair("MCMXCIV", 1994),
+  vector<pair<vector<string>, string>> vps{
+      make_pair(vector<string>{"flower", "flow", "flight"}, "fl"),
+      make_pair(vector<string>{"dog", "rececar", "car"}, ""),
+      make_pair(vector<string>{"abcd", "abcd", "abcd"}, "abcd"),
+      make_pair(vector<string>{"zebbra", "zebrin", "zeblan"}, "zeb"),
   };
 
   Solution sol;
-  for (auto [s, n] : vps) {
-    int got = sol.romanToInt(s);
-    cout << got << ' ' << n << el;
+  for (auto [strs, want] : vps) {
+    string got = sol.longestCommonPrefix(strs);
+    cout << "_ " << want << ' ' << got << el;
   }
 }
