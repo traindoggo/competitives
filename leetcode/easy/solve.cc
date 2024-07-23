@@ -1,4 +1,7 @@
 #include <bits/stdc++.h>
+
+#include <cassert>
+#include <utility>
 using namespace std;
 
 #ifdef DEBUG_
@@ -38,24 +41,36 @@ using ll = long long int;
 
 class Solution {
 public:
-  bool isPalindrome(int x) {
-    string s = to_string(x);
-    cerr << s << el;
-    int size = (int)s.length();
+  int romanToInt(string s) {
+    map<char, int> mp{{'I', 1},   {'V', 5},   {'X', 10},  {'L', 50},
+                      {'C', 100}, {'D', 500}, {'M', 1000}};
+    s = std::regex_replace(s, regex("CM"), "CCCCCCCCC");
+    s = std::regex_replace(s, regex("CD"), "CCCC");
+    s = std::regex_replace(s, regex("XC"), "XXXXXXXXX");
+    s = std::regex_replace(s, regex("XL"), "XXXX");
+    s = std::regex_replace(s, regex("IX"), "IIIIIIIII");
+    s = std::regex_replace(s, regex("IV"), "IIII");
 
-    rep(i, size / 2) {
-      if (s[i] != s[size - i - 1]) {
-        return false;
-      }
+    int sum{};
+    for (const char& ch : s) {
+      sum += mp[ch];
     }
-    return true;
-  }
+    cerr << s << ' ' << sum << el;
+    return sum;
+  };
 };
 
 int main() {
-  int x;
-  cin >> x;
+  vector<pair<string, int>> vps{
+      make_pair("III", 3),
+      make_pair("LVIII", 58),
+      make_pair("MCDLXXVI", 1476),
+      make_pair("MCMXCIV", 1994),
+  };
 
   Solution sol;
-  cout << sol.isPalindrome(x) << el;
+  for (auto [s, n] : vps) {
+    int got = sol.romanToInt(s);
+    cout << got << ' ' << n << el;
+  }
 }
